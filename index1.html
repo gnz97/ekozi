@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<style>
+#container {
+  width: 100%;
+  height: 60px;
+  position: relative;
+  background: rgb(130, 206, 241);
+  
+}
+.animate {
+    margin-top: 10px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  background-color: red;
+  border-radius: 50%;
+}
+
+p{
+    text-align: center;
+    color: white;
+}
+#rute{
+    margin-top: 10px;
+}
+
+.lapangan{
+    background-color: black;
+    margin-top: 50px;
+}
+.start{
+    margin-left: 100px;
+    width: 60px;
+    height: 270px;
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    z-index: 100;
+}
+
+.finish{
+    left: 1400px;
+    width: 60px;
+    height: 270px;
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    z-index: 200;
+}
+/* h1{
+    color: white;
+} */
+
+.start h6{
+-webkit-transform:rotate(0deg);
+-moz-transform:rotate(90deg);
+-o-transform:rotate(90deg);
+writing-mode:tb-rl;
+/* white-space:nowrap; */
+/* width: 40px; */
+letter-spacing: 6px;
+color: white;
+font-size: 50px;
+margin: 0px;
+padding-top: 50px;
+}
+.finish h6{
+-webkit-transform:rotate(0deg);
+-moz-transform:rotate(90deg);
+-o-transform:rotate(90deg);
+writing-mode:tb-rl;
+/* white-space:nowrap; */
+/* width: 40px; */
+letter-spacing: 6px;
+color: white;
+font-size: 50px;
+margin: 0px;
+padding-top: 50px;
+}
+
+.score{
+    /* margin-left: 30%; */
+    margin-top: 50px;
+    /* width: 500px;
+    height: 270px;
+    background-color: rgb(0, 217, 255);
+    border: 1px solid black; */
+}
+
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  width: 30%;
+  font-size: large;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+
+
+<div class="lapangan">
+    <div class="start"><h6>Start</h6></div>
+    <div class="finish" id="finish"><h6>Finish</h6></div>
+
+<div id ="container">
+    <div id="rute">
+        <!-- <input id="input_animate1" type="hidden" name="jenis" value="1" > -->
+        <span class="animate" id ="animate1" value="A"><p>A</p></span>
+    </div>
+</div>
+<div id ="container">
+    <div id="rute">
+        <div class="animate" id ="animate2" value="B"><p>B</p></div>
+    </div>
+</div>
+<div id ="container">
+    <div id="rute">
+        <div class="animate" id ="animate3" value="C"><p>C</p></div>
+    </div>
+</div>
+<div id ="container">
+    <div id="rute">
+        <div class="animate" id ="animate4" value="D"><p>D</p></div>
+    </div>
+</div>
+
+
+
+</div>
+<button id="start" style="width: 150px; height: 50px; background-color: dodgerblue; color: floralwhite; margin-top: 50px; margin-left: 45%;"><h3>Start</h3></button>
+<div class="score">
+    <table>
+        <tr>
+          <th>Juara</th>
+          <th>Nama</th>
+         
+        </tr>
+        <tr>
+          <td>Juara 1</td>
+          <td id="j1"></td>
+       
+        </tr>
+        <tr>
+          <td>Juara 2</td>
+          <td id="j2"></td>
+       
+        </tr>
+        <tr>
+          <td>Juara 3</td>
+          <td id="j3"></td>
+       
+        </tr>
+        <tr>
+          <td>Juara 4</td>
+          <td id="j4"></td>
+        
+      </tr>
+      </table>
+
+
+</div>
+
+<script src="jquery.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+
+    
+
+    panggilID = function (element) {
+        document.getElementById('jenis').value = element.value;
+        return true;    
+    }
+
+    function Queue () { 
+    collection = [];
+    this.print = function() {
+        $('#j1').text(collection[0]);
+        $('#j2').text(collection[1]);
+        $('#j3').text(collection[2]);
+        $('#j4').text(collection[3]);
+        // console.log(collection[0]);
+        // console.log(collection[1]);
+        // console.log(collection[2]);
+    };
+    this.enqueue = function(element) {
+        collection.push(element);
+    };
+    this.dequeue = function() {
+        return collection.shift(); 
+    };
+    this.front = function() {
+        return collection[0];
+    };
+    this.size = function() {
+        return collection.length; 
+    };
+    this.isEmpty = function() {
+        return (collection.length === 0); 
+    };
+}
+
+var q = new Queue(); 
+// q.enqueue('a'); 
+// q.enqueue('b');
+// q.enqueue('c');
+
+// q.dequeue();
+// console.log(q.front());
+// q.print();
+    
+
+$('#start').click('click',function(){
+    
+   
+    // var elem2 =  $('#animate2');
+    // var elem3 =  $('#animate3');
+    // var elem4 =  $('#animate4');
+    animate1();
+    animate2();
+    animate3();
+    animate4();
+
+    
+
+   
+
+});
+
+
+
+function score(){
+
+}
+
+function getRndInteger(min, max) {
+    min = Math.ceil(min); 
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+var animate1 = function(){
+    
+    var x1 = getRndInteger(5, 20);
+    var elem1 = document.getElementById("animate1");  
+    var xid = $('#animate1').text();
+    // q.enqueue(xid); 
+    var pos = 0;
+    var id = setInterval(function(){
+        if (pos == 1450) {
+            q.enqueue(xid); 
+            q.print();
+            clearInterval(id);
+        } else {
+            pos++;    
+            elem1.style.left = pos + "px"; 
+        }
+    }, x1);
+    
+}
+
+
+function animate2(){
+    var x2 = getRndInteger(5, 20);
+    var elem2 = document.getElementById("animate2");  
+    var xid = $('#animate2').text();
+    var pos = 0;
+    var id = setInterval(function(){
+        if (pos == 1450) {
+            q.enqueue(xid); 
+            q.print();
+            clearInterval(id);
+        } else {
+            pos++;    
+            elem2.style.left = pos + "px"; 
+        }
+    }, x2);
+}
+
+function animate3(){
+    var x3 = getRndInteger(5, 20);
+    var elem3 = document.getElementById("animate3");  
+    var xid = $('#animate3').text();
+    var pos = 0;
+    var id = setInterval(function(){
+        if (pos == 1450) {
+            q.enqueue(xid); 
+            q.print();
+            clearInterval(id);
+        } else {
+            pos++;    
+            elem3.style.left = pos + "px"; 
+        }
+    }, x3);
+}
+
+function animate4(){
+    var x4 = getRndInteger(5, 20);
+    var elem4 = document.getElementById("animate4");  
+    var xid = $('#animate4').text();
+    var pos = 0;
+    var id = setInterval(function(){
+        if (pos == 1450) {
+            q.enqueue(xid); 
+            q.print();
+            clearInterval(id);
+        } else {
+            pos++;    
+            elem4.style.left = pos + "px"; 
+        }
+    }, x4);
+}
+
+
+});
+
+</script>
+
+</body>
+</html>
